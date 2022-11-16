@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Create Movie App</string>
+    <string name="title">Title:</string>
+    <string name="enter_movie_title">Enter Movie Title</string>
+    <string name="genre">Genre:</string>
+    <string name="duration">Duration:</string>
+    <string name="rating">Rating:</string>
+    <string name="release_date">Release Date:</string>
+    <string name="select_release_date">Select Release Date</string>
+    <string name="save_movie">Save Movie</string>
+    <string name="enter_movie_data">Enter Movie Data</string>
+
+    <array name="genre">
+        <item>Adventure</item>
+        <item>Animation</item>
+        <item>Action</item>
+        <item>Comedy</item>
+        <item>Drama</item>
+        <item>Horror</item>
+        <item>SciFi</item>
+        <item>Fantasy</item>
+        <item>Thriller</item>
+        <item>Romance</item>
+    </array>
+</resources>
