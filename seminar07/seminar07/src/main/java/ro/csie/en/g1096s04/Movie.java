@@ -2,6 +2,8 @@ package ro.csie.en.g1096s04;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class Movie implements Parcelable {
@@ -9,10 +11,19 @@ public class Movie implements Parcelable {
     private Genre genre;
     private Date release;
     private Integer duration;
+    private Byte rating;
     private String poster;
     private Boolean recommended;
 
     public Movie() {
+    }
+
+    public Movie(String title, Genre genre, Date release, Integer duration, Byte rating) {
+        this.title = title;
+        this.genre = genre;
+        this.release = release;
+        this.duration = duration;
+        this.rating = rating;
     }
 
     protected Movie(Parcel in) {
@@ -23,6 +34,14 @@ public class Movie implements Parcelable {
             duration = null;
         } else {
             duration = in.readInt();
+        }
+        if (in.readByte() == 0)
+        {
+            rating = null;
+        }
+        else
+        {
+            rating = in.readByte();
         }
         poster = in.readString();
         recommended = in.readInt() == 1;
@@ -38,6 +57,15 @@ public class Movie implements Parcelable {
         } else {
             dest.writeByte((byte) 1);
             dest.writeInt(duration);
+        }
+        if (rating == null)
+        {
+            dest.writeByte((byte) 0);
+        }
+        else
+        {
+            dest.writeByte((byte) 1);
+            dest.writeByte(rating);
         }
         dest.writeString(poster);
         dest.writeInt(recommended == null ? 0 : (recommended == true ? 1 : 0));
@@ -66,13 +94,6 @@ public class Movie implements Parcelable {
 
     public void setPoster(String poster) {
         this.poster = poster;
-    }
-
-    public Movie(String title, Genre genre, Date release, Integer duration) {
-        this.title = title;
-        this.genre = genre;
-        this.release = release;
-        this.duration = duration;
     }
 
     public Boolean getRecommended() {
@@ -108,11 +129,23 @@ public class Movie implements Parcelable {
     }
 
     public Integer getDuration() {
+        if (duration == null)
+            return 60;
         return duration;
     }
 
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+
+    public Byte getRating() {
+        if (rating == null)
+            return (byte) 0;
+        return this.rating;
+    }
+
+    public void setRating(Byte rating) {
+        this.rating = rating;
     }
 
     @Override
@@ -122,6 +155,7 @@ public class Movie implements Parcelable {
                 ", genre=" + genre +
                 ", release=" + release +
                 ", duration=" + duration +
+                ", rating=" + rating +
                 ", poster='" + poster + '\'' +
                 '}';
     }
