@@ -30,10 +30,11 @@ else {
     destination.writeInt(variable);
 }
 ```
-
+---
 ### Form Activity
 
--> void method in which you set all components from the ENTITY class
+-> attribute of `class Entity` which we will edit with setters to receive the data from the form
+-> void method `initializeComponents` in which you set all components from the ENTITY class
 
 #### *spinner*
 -> setting spinner with array of strings from XML
@@ -44,6 +45,7 @@ else {
 	...
 </array>
 ```
+-> in the Form Activity XML under spinner write
 ```
 android:entries="@array/whatever"
 ```
@@ -51,6 +53,7 @@ android:entries="@array/whatever"
 ```
 public enum Whatever { Item1, Item2, ... }
 ```
+-> in the method where components gets initialized write
 ```
 spinner.setAdapter(new ArrayAdapter<Whatever>(this, android.R.layout.simple_spinner_item, Whatever.values()));
 ```
@@ -87,4 +90,52 @@ DatePickerDialogue datePickerDialogue = new DatePickerDialog (context: FormActiv
 
 // show dialogue
 datePickerDialogue.show();
+```
+
+#### *save button*
+-> set any attributes that were not set previously (eg: title for Movie)
+-> launch second activity which displays the collection (ArrayList) items
+```
+Intent intent = new Intent(packageContext: FormActivity.this, ListActivity.class);
+// add the entity with data to the intent
+intent.putExtra(name: "entity", entity);
+startActivity(intent);
+```
+
+### List Activity
+-> *attributes*
+	- static List<Entity> entityList = new ArrayList<>();
+	- RecyclerView recyclerView;
+	- ExecutorService executorService;
+
+-> in the `onCreate` method we need to get the entity we received through the intent, and to set a custom adapter to the recycler view
+```
+Intent intent = getIntent();
+
+// get the entity from the intent
+Bundle extras = intent.getExtras();
+Entity entityReceived = extras.getParcelable(key: "entity");
+
+// add entity to the list
+entityList.add(entity);
+
+// set recycler view
+recyclerView = findViewById(R.id.recyclerViewId);
+
+// set executor service threads
+executorService = Executors.newFixedThreadPool(nThreads: 4);
+
+// create custom adapter
+EntityAdapter entityAdapter = new EntityAdapter(context: this, entityList, executorService);
+
+// set adapter to recycler
+recyclerView.setAdapter(entityAdapter);
+```
+-> in `onPause` shut down the executor
+```
+@Override
+protected void onPause() {
+    super.onPause();
+    executorService.shutdown();
+}
 ```
