@@ -23,18 +23,6 @@ import java.util.concurrent.ExecutorService;
 
 public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.MovieHolder> {
 
-    private List<Movie> mItems;
-    private Context mContext;
-    ExecutorService executorService;
-    Handler uiHandler;
-
-    // constructor with parameters
-    public MovieAdapter(Context context, List<Movie> movieList, ExecutorService executorService) {
-        this.mContext = context;
-        this.mItems = movieList;
-        this.executorService = executorService;
-    }
-
     // class for components holder FOR RECYCLE VIEW
     public static class MovieHolder extends RecyclerView.ViewHolder {
 
@@ -58,6 +46,20 @@ public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.MovieHolder
             ivPoster = itemView.findViewById(R.id.imageView);
             checkboxMovieHolder = itemView.findViewById(R.id.checkBoxMovie);
         }
+    }
+
+    // ATTRIBUTES
+    private List<Movie> mItems;
+    private Context mContext;
+    ExecutorService executorService;
+    // handler for getting bitmap
+    Handler uiHandler;
+
+    // constructor with parameters
+    public MovieAdapter(Context context, List<Movie> movieList, ExecutorService executorService) {
+        this.mContext = context;
+        this.mItems = movieList;
+        this.executorService = executorService;
     }
 
     @NonNull
