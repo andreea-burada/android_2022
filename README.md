@@ -34,6 +34,7 @@ else {
 ### Form Activity
 
 -> attribute of `class Entity` which we will edit with setters to receive the data from the form \
+-> in `onCreate` we initialize attribute entity -> `entity = new Entity();`
 -> void method `initializeComponents` in which you set all components from the ENTITY class
 
 #### *spinner*
@@ -141,3 +142,39 @@ protected void onPause() {
 ```
 ---
 ### Custom Adapter - Entity Adapter
+-> `extends RecyclerView.Adapter<EntityAdapter.EntityHolder` -> see **Entity Holder** below for more info \
+-> attributes \
+&ensp;&ensp;&ensp;&ensp;- `List<Entity> entityList` \
+&ensp;&ensp;&ensp;&ensp;- `Context entityContext` \
+&ensp;&ensp;&ensp;&ensp;- `ExecutorService executorService` \
+&ensp;&ensp;&ensp;&ensp;- `Handler uiHandler` // for networking \
+\
+-> default constructor will have the `Context, List<Entity>, ExecutorService` parameters list \
+\
+-> `onCreateViewHolder` method
+```
+// inflate layout
+LayoutInflater inflater = LayoutInflater.from(entityContext);
+View itemView = inflater.inflate(R.layout.entity_item, parent, attachToRoot: false);
+
+// create entity holder
+EntityHolder viewHolder = new EntityHolder(itemView);
+
+return viewHolder;
+```
+-> `onBindViewHolder` method \
+&ensp;&ensp;&ensp;&ensp;-> it contains a `holder` which is of EntityHolder type \
+&ensp;&ensp;&ensp;&ensp;-> here you set all components values and event listeners if needed \
+&ensp;&ensp;&ensp;&ensp;-> this is also where you get resources or anything like that \
+&ensp;&ensp;&ensp;&ensp;-> to get current Entity `entityList.get(position)` \
+\
+-> `getItemCount()` method
+`return entityList.size()`
+
+---
+### Entity Holder
+-> `extends RecyclerView.ViewHolder` \
+-> attributes are the components from `entity_item.xml` layout \
+-> attribute `view` \
+\
+-> in constructor which takes `View` parameter initialize all components based on the `entity_item.xml` names
