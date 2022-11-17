@@ -10,7 +10,7 @@
 
 #### Parcelable interface
 
--> implies serialization and de-serialization
+-> implies serialization and de-serialization \
 -> ser. and de-ser should be written in the *SAME* order (if you ser. var1, var2, var3 then you have to de-ser. them in the same order 1, 2, 3 ...)
 
 ##### Special Cases
@@ -19,7 +19,7 @@
 ```
 destination.writeInt(booleanVar == null ? 0 : (booleanVar == true ? 1 : 0));
 ```
--> for *serializing variables that could be null*
+-> for *serializing variables that could be null* \
 	-> write a dummy Byte (0 or 1) so when you de-serialize you know if you had null or a value
 ```
 if (variable == null) {
@@ -33,7 +33,7 @@ else {
 ---
 ### Form Activity
 
--> attribute of `class Entity` which we will edit with setters to receive the data from the form
+-> attribute of `class Entity` which we will edit with setters to receive the data from the form \
 -> void method `initializeComponents` in which you set all components from the ENTITY class
 
 #### *spinner*
@@ -93,7 +93,7 @@ datePickerDialogue.show();
 ```
 
 #### *save button*
--> set any attributes that were not set previously (eg: title for Movie)
+-> set any attributes that were not set previously (eg: title for Movie) \
 -> launch second activity which displays the collection (ArrayList) items
 ```
 Intent intent = new Intent(packageContext: FormActivity.this, ListActivity.class);
@@ -101,13 +101,13 @@ Intent intent = new Intent(packageContext: FormActivity.this, ListActivity.class
 intent.putExtra(name: "entity", entity);
 startActivity(intent);
 ```
-
+---
 ### List Activity
--> *attributes*
-	- static List<Entity> entityList = new ArrayList<>();
-	- RecyclerView recyclerView;
-	- ExecutorService executorService;
-
+-> *attributes* \
+	- `static List<Entity> entityList = new ArrayList<>();` \
+	- `RecyclerView recyclerView;` \
+	- `ExecutorService executorService;` \
+\
 -> in the `onCreate` method we need to get the entity we received through the intent, and to set a custom adapter to the recycler view
 ```
 Intent intent = getIntent();
@@ -139,3 +139,5 @@ protected void onPause() {
     executorService.shutdown();
 }
 ```
+---
+# Custom Adapter - Entity Adapter
