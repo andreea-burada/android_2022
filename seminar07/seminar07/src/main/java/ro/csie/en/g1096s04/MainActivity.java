@@ -34,14 +34,14 @@ public class MainActivity extends AppCompatActivity {
 
     Movie movie;
 
-    class MyOnClickListener implements View.OnClickListener
-    {
-        @Override
-        public void onClick(View view) {
-            if(view.getId() == R.id.btnSave)
-                Toast.makeText(getApplicationContext(), "Movie saved!", Toast.LENGTH_LONG).show();
-        }
-    }
+//    class MyOnClickListener implements View.OnClickListener
+//    {
+//        @Override
+//        public void onClick(View view) {
+//            if(view.getId() == R.id.btnSave)
+//                Toast.makeText(getApplicationContext(), "Movie saved!", Toast.LENGTH_LONG).show();
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
