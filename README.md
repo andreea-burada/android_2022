@@ -34,7 +34,7 @@ else {
 ### Form Activity
 
 -> attribute of `class Entity` which we will edit with setters to receive the data from the form \
--> in `onCreate` we initialize attribute entity -> `entity = new Entity();`
+-> in `onCreate` we initialize attribute entity -> `entity = new Entity();` \
 -> void method `initializeComponents` in which you set all components from the ENTITY class
 
 #### *spinner*
