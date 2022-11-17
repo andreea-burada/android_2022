@@ -169,8 +169,9 @@ return viewHolder;
 &ensp;&ensp;&ensp;&ensp;-> to get current Entity `entityList.get(position)` \
 \
 -> `getItemCount()` method
-`return entityList.size()`
-
+```
+return entityList.size()
+```
 ---
 ### Entity Holder
 -> `extends RecyclerView.ViewHolder` \
@@ -178,3 +179,88 @@ return viewHolder;
 -> attribute `view` \
 \
 -> in constructor which takes `View` parameter initialize all components based on the `entity_item.xml` names
+
+---
+### Getting Image from the Internet
+-> in `strings.xml`
+```
+<string name="NameToFindResource">[url]</string>
+...
+```
+-> get resourceId of url
+```
+int resourceId = entityContext.getResources().getIdentifier(entity.getAttribute(), defType: "string", entityContext.getPackageName()); // .getAttribute() reffers to any method that could return "NameToFindResource"
+								 // eg. .getTitle() for Movie
+
+if (resourceId != 0) {
+	// download the image
+    uiHandler = new Handler(getMainLooper(), new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message message) {
+        	// code that we set as the "successful" code
+            int wantedBitmapCode = 1122;
+            if (message.what == wantedBitmapCode)
+            {
+            	// set image to the component that we want to display it
+                holder.imageViewId.setImageBitmap((Bitmap) message.obj);
+            }
+            // return true regardless of outcome
+            return true;
+        }
+    });
+    // through the executor service submit a new instance of class DownloadImageTask
+    // entityContext.getString(resourceId) - url from .xml
+    executorService.submit(new DownloadImageTask(entityContext.getString(resourceId), uiHandler));
+}
+```
+-> see **Download Image Task Class**
+
+---
+### Download Image Task Class
+-> `extends Thread` \
+-> `implements Runnable` \
+-> attributes \
+&ensp;&ensp;&ensp;&ensp;- `String imageUrl` \
+&ensp;&ensp;&ensp;&ensp;- `Handler handler` -> uiHandler from **EntityAdapter** \
+-> constructor with parameters
+```
+public DownloadImageTask(String url, Handler uiHandler) {
+	imageUrl = url;
+	handler = uiHandler;
+}
+```
+-> since it extends `Thread` it will have the method `run()`
+```
+@Override
+public void run() {
+    super.run();
+    // we need a HTTP connection
+    HttpURLConnection connection = null;
+    // bitmap that we will send with the message and which will have the downloaded image
+    Bitmap bitmap = null;
+    try {
+        URL url = new URL(imageUrl);
+        // open connection
+        connection = (HttpURLConnection) url.openConnection();
+        // get data stream from connection
+        InputStream inputStream = connection.getInputStream();
+        // get bitmap
+        bitmap = BitmapFactory.decodeStream(inputStream);
+
+    } catch (MalformedURLException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        connection.disconnect();
+    }
+    // generate message to send back
+    Message message = new Message();
+    // set code that we define as the "successful" code
+    message.what = 1122;
+    // set bitmap to obj
+    message.obj = bitmap;
+    // send at front of queue so message is received by EntityAdapter
+    handler.sendMessageAtFrontOfQueue(message);
+}
+```
