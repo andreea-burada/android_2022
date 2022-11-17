@@ -1,17 +1,25 @@
 ## Android Notes
 
-### Parcelable interface
+### ENTITY class
+-> class with which we work, think Student, Movie etc.
+-> *implements Parcelable* -> auto-generate methods for interface
+	-> `public int describeContents()`
+	-> `public void writeToParcel(Parcel parcel/destination, int i)`	-> this is where we *SERIALIZE*
+	-> `creator` field will also be auto-generated
+		-> `protected Entity(Parcel in)`	-> this is where we *DE-SERIALIZE*
+
+#### Parcelable interface
 
 -> implies serialization and de-serialization
 -> ser. and de-ser should be written in the *SAME* order (if you ser. var1, var2, var3 then you have to de-ser. them in the same order 1, 2, 3 ...)
 
-#### Special Cases
+##### Special Cases
 
--> for serializing booleans:
+-> for *serializing booleans*:
 ```
 destination.writeInt(booleanVar == null ? 0 : (booleanVar == true ? 1 : 0));
 ```
--> for serializing variables that could be null
+-> for *serializing variables that could be null*
 	-> write a dummy Byte (0 or 1) so when you de-serialize you know if you had null or a value
 ```
 if (variable == null) {
