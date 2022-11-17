@@ -142,7 +142,7 @@ protected void onPause() {
 ```
 ---
 ### Custom Adapter - Entity Adapter
--> `extends RecyclerView.Adapter<EntityAdapter.EntityHolder` -> see **Entity Holder** below for more info \
+-> `extends RecyclerView.Adapter<EntityAdapter.EntityHolder` -> see [**Entity Holder**](### Entity Holder) below for more info \
 -> attributes \
 &ensp;&ensp;&ensp;&ensp;- `List<Entity> entityList` \
 &ensp;&ensp;&ensp;&ensp;- `Context entityContext` \
@@ -221,7 +221,7 @@ if (resourceId != 0) {
 -> `implements Runnable` \
 -> attributes \
 &ensp;&ensp;&ensp;&ensp;- `String imageUrl` \
-&ensp;&ensp;&ensp;&ensp;- `Handler handler` -> uiHandler from **EntityAdapter** \
+&ensp;&ensp;&ensp;&ensp;- `Handler handler` -> uiHandler from [**EntityAdapter**](###### Custom Adapter - Entity Adapter) \
 -> constructor with parameters
 ```
 public DownloadImageTask(String url, Handler uiHandler) {
