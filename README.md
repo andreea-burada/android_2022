@@ -1,12 +1,12 @@
 ## Android Notes
 
 ### ENTITY class
--> class with which we work, think Student, Movie etc.
--> *implements Parcelable* -> auto-generate methods for interface
-	-> `public int describeContents()`
-	-> `public void writeToParcel(Parcel parcel/destination, int i)`	-> this is where we *SERIALIZE*
-	-> `creator` field will also be auto-generated
-		-> `protected Entity(Parcel in)`	-> this is where we *DE-SERIALIZE*
+-> class with which we work, think Student, Movie etc. \
+-> *implements Parcelable* -> auto-generate methods for interface \
+	-> `public int describeContents()` \
+	-> `public void writeToParcel(Parcel parcel/destination, int i)`	-> this is where we *SERIALIZE* \
+	-> `creator` field will also be auto-generated \
+		-> `protected Entity(Parcel in)`	-> this is where we *DE-SERIALIZE* \
 
 #### Parcelable interface
 
