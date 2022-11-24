@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String RECIPE_GET_JSON = "https://jsonkeeper.com/b/OCIE";
     //private static final String RECIPE_POST_JSON = "https://ptsv2.com/t/MDA2021/post";
-    private static final String RECIPE_POST_JSON = "https://ptsv2.com/t/w1m4t-1669191112/post";
+    //private static final String RECIPE_POST_JSON = "https://ptsv2.com/t/w1m4t-1669191112/post";
+    private static final String RECIPE_POST_JSON = "https://httpdump.app/dumps/0761da07-2100-4116-b896-9ce59dc9bb48";
     private static final String TAG = MainActivity.class.getName();
     private Button btnGet;
     private Button btnPost;
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getJson(View view)
     {
+        Toast.makeText(MainActivity.this, "GET Request for Recipes", Toast.LENGTH_SHORT).show();
         Thread thread= new Thread()
         {
             @Override
@@ -61,10 +64,19 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         // parse the json
                         List<Recipe> results = RecipeJsonParser.fromJson(recipeJSONArray);
-                        if (recipes.containsAll(results) == false)
-                            recipes.addAll(results);
-                        for(Recipe recipe : recipes) {
-                            Log.d(TAG, "Recipe: " + recipe);
+                        if (results.size() > 0) {
+                            if (recipes.containsAll(results) == false)
+                                recipes.addAll(results);
+                            StringBuilder recipesString = new StringBuilder();
+                            for (Recipe recipe : recipes) {
+                                Log.d(TAG, "Recipe: " + recipe);
+                                recipesString.append(recipe.toString()).append("\n");
+                            }
+                            tvPostResult.setText(recipesString.toString());
+                        }
+                        else
+                        {
+                            tvPostResult.setText("No data retrieved.");
                         }
                     }
                 });
@@ -74,25 +86,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void postJson(View view) {
-        Thread thread= new Thread()
-        {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // get json of recipes
-                        recipesJSONArray = RecipeJsonParser.toJson(recipes);
-                        isReady = true;
+        Toast.makeText(MainActivity.this, "POST Request for Recipes", Toast.LENGTH_SHORT).show();
+        if (recipes.size() > 0) {
+            Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // get json of recipes
+                            recipesJSONArray = RecipeJsonParser.toJson(recipes);
+                            isReady = true;
+                        }
+                    });
+                    while (isReady == false) {
                     }
-                });
-                while (isReady == false) {}
-                HttpConnectionService httpConnectionService = new HttpConnectionService(RECIPE_POST_JSON);
-                String postResult = httpConnectionService.postData(recipesJSONArray.toString());
-                tvPostResult.setText(postResult);
-            }
-        };
-        thread.start();
+                    HttpConnectionService httpConnectionService = new HttpConnectionService(RECIPE_POST_JSON);
+                    String postResult = httpConnectionService.postData(recipesJSONArray.toString());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (postResult != null)
+                                tvPostResult.setText(postResult);
+                            else
+                                tvPostResult.setText("URL could not be accessed.");
+                        }
+                    });
+                }
+            };
+            thread.start();
+        }
+        else
+        {
+            Toast.makeText(this, "No data to send through POST request.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void trustEveryone() {

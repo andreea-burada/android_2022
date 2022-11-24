@@ -6,36 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnGet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/btn_get_json"
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="340dp"
+        android:layout_height="106dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/border"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        android:onClick="getJson"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btnPost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:onClick="postJson"
-        android:text="@string/btn_post_json"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btnGet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="getJson"
+            android:textSize="7pt"
+            android:text="@string/btn_get_json" />
+
+        <Button
+            android:id="@+id/btnPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:onClick="postJson"
+            android:textSize="7pt"
+            android:text="@string/btn_post_json" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="235dp"
-        android:layout_height="33dp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp"
         android:text="Post Data Results"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPost" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
