@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Get and Post JSON</string>
+    <string name="btn_get_json">Get</string>
+    <string name="btn_post_json">Post</string>
+</resources>
