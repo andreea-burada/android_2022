@@ -55,14 +55,13 @@ public class HttpConnectionService {
         return jsonFile.toString();
     }
 
-    public String postData(String jsonArray) {
+    public String postData(JSONArray jsonArray) {
         JSONObject recipesJsonData = new JSONObject();
         String result = null;
         try {
             // get json array from string
-            JSONArray recipesJsonArray = new JSONArray(jsonArray);
             recipesJsonData.put("name", "Burada Andreea 1096");
-            recipesJsonData.put("data", recipesJsonArray);
+            recipesJsonData.put("data", jsonArray);
         } catch (JSONException e) {
             e.printStackTrace();
         }

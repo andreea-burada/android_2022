@@ -31,14 +31,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String RECIPE_GET_JSON = "https://jsonkeeper.com/b/OCIE";
     //private static final String RECIPE_POST_JSON = "https://ptsv2.com/t/MDA2021/post";
     //private static final String RECIPE_POST_JSON = "https://ptsv2.com/t/w1m4t-1669191112/post";
-    private static final String RECIPE_POST_JSON = "https://httpdump.app/dumps/0761da07-2100-4116-b896-9ce59dc9bb48";
+    private static final String RECIPE_POST_JSON = "https://httpdump.app/dumps/9b132b52-b676-4d35-920a-bab9d728068e";
     private static final String TAG = MainActivity.class.getName();
     private Button btnGet;
     private Button btnPost;
     private TextView tvPostResult;
     private List<Recipe> recipes= new ArrayList<>();
-    private JSONArray recipesJSONArray;
-    private boolean isReady = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,18 +89,9 @@ public class MainActivity extends AppCompatActivity {
             Thread thread = new Thread() {
                 @Override
                 public void run() {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            // get json of recipes
-                            recipesJSONArray = RecipeJsonParser.toJson(recipes);
-                            isReady = true;
-                        }
-                    });
-                    while (isReady == false) {
-                    }
+                    JSONArray recipesJSONArray = RecipeJsonParser.toJson(recipes);
                     HttpConnectionService httpConnectionService = new HttpConnectionService(RECIPE_POST_JSON);
-                    String postResult = httpConnectionService.postData(recipesJSONArray.toString());
+                    String postResult = httpConnectionService.postData(recipesJSONArray);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
