@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -66,6 +67,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         List<Movie> movieListFromDB = movieDao.getAllMovies();
         MovieChart movieChart = new MovieChart(this, movieListFromDB);
         setContentView(movieChart);
+    }
+
+    public void viewLineChart(View view) {
+        // get DB manager
+        DatabaseManager db_ = DatabaseManager.getInstance(this);
+        MovieDao movieDao = db_.getMovieDao();
+        List<Movie> movieListFromDB = movieDao.getAllMovies();
+        MovieLineChart lineChart = new MovieLineChart(this, movieListFromDB);
+        setContentView(lineChart);
     }
 
     class MyOnClickListener implements View.OnClickListener

@@ -18,6 +18,12 @@ public class MovieChart extends View {
     private Random random;
     private Paint paint;
 
+    static private int paddingLeft = 85;
+    static private int paddingRight = 85;
+    static private int paddingTop = 160;
+    static private int paddingBottom = 15;
+    static private int paddingBetweenColumn = 15;
+
     public MovieChart(Context context, List<Movie> movieListFromDB) {
         super(context);
         this.context = context;
@@ -52,7 +58,7 @@ public class MovieChart extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         int maxValue = getMaxValue();
-        float colWidth = getWidth() / stats.size();
+        float colWidth = (float) (getWidth() - paddingLeft - paddingRight) / stats.size();
         drawValues(canvas, maxValue, colWidth);
     }
 
@@ -60,23 +66,32 @@ public class MovieChart extends View {
         int currentColumn = 0;
         for (String genre : stats.keySet())
         {
-            // get random color
-            int color = generateColor();
-            paint.setColor(color);
-            drawColumn(canvas, stats.get(genre), maxValue, colWidth, currentColumn);
+            drawColumn(canvas, stats.get(genre), maxValue, colWidth, currentColumn, genre);
             currentColumn++;
         }
     }
 
-    private void drawColumn(Canvas canvas, int value, int maxValue, float colWidth, int currentColumn) {
+    private void drawColumn(Canvas canvas, int value, int maxValue, float colWidth, int currentColumn, String label) {
+        int color = generateColor();
+        int offset = 20;
+        paint.setColor(color);
+
+        float unit = (float) (getHeight() - paddingBottom - paddingTop) / maxValue;
         float x1; float y1;
         float x2; float y2;
-        x1 = currentColumn * colWidth;
-        y1 = (getHeight() / maxValue) * ( maxValue - value);
+        x1 = currentColumn * colWidth + paddingLeft;
         //y1 = (1 - (float) value / maxValue) * getHeight();
-        x2 = (currentColumn + 1) * colWidth;
-        y2 = getHeight();
+        y1 = unit * (maxValue - value) + paddingTop;
+        x2 = (currentColumn + 1) * colWidth + paddingLeft - paddingBetweenColumn;
+        y2 = getHeight() - paddingBottom;
         canvas.drawRect(x1, y1, x2, y2, paint);
+
+        //draw label
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(65);
+        canvas.rotate(-90, x1 + (colWidth - paddingBetweenColumn) / 2 + offset, y2 - offset * 3);
+        canvas.drawText(label + ":" + value, x1 + (colWidth - paddingBetweenColumn) / 2 + offset, y2 - offset * 3, paint);
+        canvas.rotate(90, x1 + (colWidth - paddingBetweenColumn) / 2 + offset, y2 - offset * 3);
     }
 
     private int generateColor() {
