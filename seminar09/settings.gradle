@@ -13,19 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Laboratories"
-include ':dma01'
-include ':dma02'
-include ':g1084s03'
-include ':g1083s03'
-include ':dma03'
-include ':g1096s03'
-include ':g1084s04'
-include ':g1083s04'
-include ':dma04'
-include ':g1096s04'
-include ':dma05'
-include ':dma07'
-include ':dma08'
-include ':dma09'
-include ':dma10'
-include ':dma11'
+include ':seminar09'
