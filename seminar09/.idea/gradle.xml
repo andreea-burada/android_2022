@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/dma01" />
+            <option value="$PROJECT_DIR$/dma02" />
+            <option value="$PROJECT_DIR$/dma03" />
+            <option value="$PROJECT_DIR$/dma04" />
+            <option value="$PROJECT_DIR$/dma05" />
+            <option value="$PROJECT_DIR$/dma07" />
+            <option value="$PROJECT_DIR$/dma08" />
+            <option value="$PROJECT_DIR$/dma09" />
+            <option value="$PROJECT_DIR$/dma10" />
+            <option value="$PROJECT_DIR$/dma11" />
+            <option value="$PROJECT_DIR$/g1083s03" />
+            <option value="$PROJECT_DIR$/g1083s04" />
+            <option value="$PROJECT_DIR$/g1084s03" />
+            <option value="$PROJECT_DIR$/g1084s04" />
+            <option value="$PROJECT_DIR$/g1096s03" />
+            <option value="$PROJECT_DIR$/g1096s04" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
