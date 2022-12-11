@@ -1,6 +1,7 @@
 package ro.csie.en.g1096s04;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,6 +25,11 @@ public class MovieChart extends View {
         this.paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         stats = crunchStats(movieListFromDB);
 
+    }
+
+    @Override
+    protected void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     private Map<String, Integer> crunchStats(List<Movie> movieListFromDB) {
