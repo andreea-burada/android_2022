@@ -21,7 +21,7 @@ public class MovieChart extends View {
     static private int paddingLeft = 85;
     static private int paddingRight = 85;
     static private int paddingTop = 160;
-    static private int paddingBottom = 15;
+    static private int paddingBottom = 0;
     static private int paddingBetweenColumn = 15;
 
     public MovieChart(Context context, List<Movie> movieListFromDB) {

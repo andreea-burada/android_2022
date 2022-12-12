@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SeekBar sbDuration;
     EditText etTitle;
     Switch aSwitch;
+    View addedView = null;
 
     Movie movie;
 
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // get all movies from DB
         List<Movie> movieListFromDB = movieDao.getAllMovies();
         MovieChart movieChart = new MovieChart(this, movieListFromDB);
+        addedView = movieChart;
         setContentView(movieChart);
     }
 
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MovieDao movieDao = db_.getMovieDao();
         List<Movie> movieListFromDB = movieDao.getAllMovies();
         MovieLineChart lineChart = new MovieLineChart(this, movieListFromDB);
+        addedView = lineChart;
         setContentView(lineChart);
     }
 
@@ -89,15 +93,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        // if content view is chart -> return to form
-        if (this.findViewById(android.R.id.content) != findViewById(R.id.layout_activityMain))
-        {
-            setContentView(R.layout.activity_main);
-        }
+        ViewGroup rootView = (ViewGroup) findViewById(android.R.id.content);
+
+        if (rootView.getChildAt(0) != addedView)
+            super.onBackPressed();
         else
         {
-            super.onBackPressed();
+            rootView.removeView(addedView);
+            setContentView(R.layout.activity_main);
+            initializeControls();
         }
+
     }
 
     @Override
@@ -109,15 +115,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initializeControls();
 
         getLifecycle().addObserver(new MyObserver());
-        btnSave.setOnClickListener(this);
-        btnSave.setOnClickListener(new MyOnClickListener());
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(view.getId() == R.id.btnSave)
-                    Toast.makeText(getApplicationContext(), "Movie saved!", Toast.LENGTH_LONG).show();
-            }
-        });
+
+        // DIFFERENT WAYS TO SET ON CLICK LISTENER
+//        btnSave.setOnClickListener(this);
+//        btnSave.setOnClickListener(new MyOnClickListener());
+//        btnSave.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(view.getId() == R.id.btnSave)
+//                    Toast.makeText(getApplicationContext(), "Movie saved!", Toast.LENGTH_LONG).show();
+//            }
+//        });
+    }
+
+    private void initializeControls() {
+        btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(view ->
         {
             movie.setTitle(etTitle.getText().toString());
@@ -126,10 +138,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         });
 
-    }
-
-    private void initializeControls() {
-        btnSave = findViewById(R.id.btnSave);
         btnRelease = findViewById(R.id.btnRelease);
         btnRelease.setOnClickListener(new View.OnClickListener() {
             @Override
