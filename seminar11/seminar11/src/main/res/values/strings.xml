@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Seminar 11</string>
+    <string name="title">Title</string>
+    <string name="genre">Genre</string>
+    <string name="duration">Duration</string>
+    <string name="release_date">Release date</string>
+    <string name="movie_title">Movie title</string>
+    <string name="select_release_date">Select Release Date</string>
+    <string name="save_movie">Save movie</string>
+
+    <array name="genre">
+        <item>ADVENTURE</item>
+        <item>COMEDY</item>
+        <item>ACTION</item>
+        <item>DRAMA</item>
+        <item>ANIMATION</item>
+    </array>
+    <string name="Enola">https://www.urban.ro/wp-content/uploads/2020/09/enolaholmesposter.jpg</string>
+    <string name="Manifest">https://flxt.tmsimg.com/assets/p17602726_b_v13_ab.jpg</string>
+    <string name="Extraction">https://m.media-amazon.com/images/M/MV5BNDBkOWNiMTYtMjlkZS00NzJlLTg0ZmUtN2YwYWQ3N2I3N2Y0XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg</string>
+    <string name="LaurelandHardy">https://m.media-amazon.com/images/I/51KEbLJFPSL._SX300_SY300_QL70_FMwebp_.jpg</string>
+    <string name="Ratatouille">https://m.media-amazon.com/images/I/51bOQKCq1ZL.jpg</string>
+    <string name="read_json">Read Json</string>
+    <string name="view_chart">View Chart</string>
+
+</resources>
