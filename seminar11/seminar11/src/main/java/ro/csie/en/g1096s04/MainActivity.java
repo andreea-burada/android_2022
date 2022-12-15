@@ -91,6 +91,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(lineChart);
     }
 
+    public void viewPieChart(View view) {
+        // get DB manager
+        DatabaseManager db_ = DatabaseManager.getInstance(this);
+        MovieDao movieDao = db_.getMovieDao();
+        List<Movie> movieListFromDB = movieDao.getAllMovies();
+        MoviePieChart pieChart = new MoviePieChart(this, movieListFromDB);
+        addedView = pieChart;
+        setContentView(pieChart);
+    }
+
     class MyOnClickListener implements View.OnClickListener
     {
         @Override

@@ -83,21 +83,23 @@
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="11pt"
-            android:text="@string/release_date" />
+            android:layout_height="72dp"
+            android:gravity="center_horizontal"
+            android:text="@string/release_date"
+            android:textSize="11pt" />
 
         <Switch
             android:id="@+id/switch1"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="73dp"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:text="Switch" />
+            android:text="" />
 
         <Button
             android:id="@+id/btnRelease"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="146dp"
+            android:layout_height="74dp"
             android:layout_weight="1"
             android:text="@string/select_release_date" />
     </LinearLayout>
@@ -105,42 +107,57 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="viewChart"
+            android:text="View Vertical Bar Chart" />
+
+        <Button
+            android:id="@+id/btnBarChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="viewBarChart"
+            android:text="View Horizontal Bar Chart" />
+
+        <Button
+            android:id="@+id/btnMovieLineChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="viewLineChart"
+            android:text="View Line Chart" />
+
+        <Button
+            android:id="@+id/btnMoviePieChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Pie Chart"
+            android:onClick="viewPieChart"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="readJson"
+            android:text="@string/read_json"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btnSave"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/save_movie" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/read_json"
-        android:onClick="readJson"/>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/view_chart"
-        android:onClick="viewChart"/>
-
-    <Button
-        android:id="@+id/btnMovieLineChart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="View Line Chart"
-        android:onClick="viewLineChart"/>
-
-    <Button
-        android:id="@+id/btnBarChart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="View Horizontal Bar Chart"
-        android:onClick="viewBarChart"/>
 </LinearLayout>
