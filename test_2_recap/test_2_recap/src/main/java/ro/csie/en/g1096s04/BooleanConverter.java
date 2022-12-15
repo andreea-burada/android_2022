@@ -10,7 +10,7 @@ public class BooleanConverter {
     }
 
     @TypeConverter
-    public static int toTimestamp(boolean value) {
+    public static int toInt(boolean value) {
         return value == false ? 0 : 1;
     }
 }

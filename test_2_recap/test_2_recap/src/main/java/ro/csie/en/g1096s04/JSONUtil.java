@@ -46,7 +46,7 @@ public class JSONUtil {
 
         String moviePoster = jsonObject.getString("poster");
 
-        return new Movie(movieTitle, movieGenre, movieRelease, movieDuration,movieRecommended, moviePoster);
+        return new Movie(movieTitle, movieGenre, movieRelease, movieDuration, movieRecommended, moviePoster);
 
     }
 }
